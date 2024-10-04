@@ -1,4 +1,8 @@
+import express from 'express';
 import { TronWeb } from 'tronweb';
+import TelegramBot from 'node-telegram-bot-api';
+
+//variables
 const privateKey = process.env.PRIVATE_KEY
 const apiKey = '65a896e1-1da8-459b-80b0-cf0ac3a2e786'
 
@@ -8,6 +12,17 @@ var tronWeb = new TronWeb({
     privateKey: privateKey,
 });
 
+const app = express()
+const port = 3000
+
+// replace the value below with the Telegram token you receive from @BotFather
+const token = '7553876036:AAG4rh8cmjYRIgg3LweIwJTFB5tuTjusAmI';
+
+// Create a bot that uses 'polling' to fetch new updates
+const bot = new TelegramBot(token, {polling: false});
+const chatId = 'Bitcoin_Meter';
+
+bot.sendMessage(chatId, 'Received your message');
 let abi = [
     {
         "outputs": [
@@ -55,15 +70,25 @@ let abi = [
 
 ];
 
+// price calculations functions 
 const roundToMillionth = (value) => {
     return Number(value.toFixed(7));
-  };
+};
 
-  const tickToPrice = (tick, tokenDecimals0, tokenDecimals1) => {
+const tickToPrice = (tick, tokenDecimals0, tokenDecimals1) => {
     const ratio = (1.0001 ** Number(tick));
     const decimalShift = 10 ** (Number(tokenDecimals0) - Number(tokenDecimals1));
     return ratio * decimalShift;
 }
+
+app.get('/', (req, res) => {
+  res.send('sucess response')
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+
 
 async function start() {
 
