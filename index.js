@@ -1,8 +1,9 @@
+//imports
 import express from 'express';
 import { TronWeb } from 'tronweb';
 import TelegramBot from 'node-telegram-bot-api';
 
-//variables
+//tronweb variables
 const privateKey = process.env.PRIVATE_KEY
 const apiKey = '65a896e1-1da8-459b-80b0-cf0ac3a2e786'
 
@@ -12,18 +13,22 @@ var tronWeb = new TronWeb({
     privateKey: privateKey,
 });
 
+//express variables
 const app = express()
 const port = process.env.PORT || 3000;
 
+//Telegrambot variables
 // replace the value below with the Telegram token you receive from @BotFather
 const token = '7553876036:AAG4rh8cmjYRIgg3LweIwJTFB5tuTjusAmI';
 
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, { polling: false });
 const chatId = '@Bitcoin_Meter';
-const opts = {
-    parse_mode: 'Markdown'
-};
+const opts = {parse_mode: 'Markdown'};
+var minutes = 240;
+var the_interval = minutes * 60 * 1000;
+var sunswap_url = 'https://sun.io/?lang=en-US#/v3/swap';
+var dextools_url = 'https://www.dextools.io/app/en/tron/pair-explorer/TRzE68tbBoy2Ec5vLTLzQEPCUXktu4bB6D';
 
 let abi = [
     {
@@ -92,6 +97,13 @@ app.listen(port, () => {
 })
 
 
+
+setInterval(function() {
+  
+    start();
+
+}, the_interval);
+
 async function start() {
 
     tronWeb.setAddress('TEe5MgWnhEEEoMUrRBsAovSJnDK4QQivBe');
@@ -111,9 +123,10 @@ async function start() {
 
     console.log(rev_trx_price)
     console.log(trx_rev_price)
-    let msg = '*Current REV Price: * \n\n1 TRX = ' + trx_rev_price + ' REV';
-    bot.sendMessage(chatId, msg, opts);
+    let msg = `*Current REV Price: * \n\n1 TRX = ${trx_rev_price} REV\n\n================\n\n*Trade REV in* [SunSwap](${sunswap_url})\n\n================\n\n*Check REV Chart in* [DexTools](${dextools_url})\n\n`;
 
+
+    bot.sendMessage(chatId, msg, opts);
 }
 
 start();
