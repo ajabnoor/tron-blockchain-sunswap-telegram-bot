@@ -19,10 +19,12 @@ const port = 3000
 const token = '7553876036:AAG4rh8cmjYRIgg3LweIwJTFB5tuTjusAmI';
 
 // Create a bot that uses 'polling' to fetch new updates
-const bot = new TelegramBot(token, {polling: false});
-const chatId = 'Bitcoin_Meter';
+const bot = new TelegramBot(token, { polling: false });
+const chatId = '@Bitcoin_Meter';
+const opts = {
+    parse_mode: 'Markdown'
+};
 
-bot.sendMessage(chatId, 'Received your message');
 let abi = [
     {
         "outputs": [
@@ -82,11 +84,11 @@ const tickToPrice = (tick, tokenDecimals0, tokenDecimals1) => {
 }
 
 app.get('/', (req, res) => {
-  res.send('sucess response')
+    res.send('sucess response')
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+    console.log(`Example app listening on port ${port}`)
 })
 
 
@@ -102,13 +104,15 @@ async function start() {
     // let result = await contract.getPool('TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR','TKKkXMr7uuZ5kdajTcTqz9YNhAfNZnr7wm',3000).call()
     // let result = await contract.owner().call()
 
-    const rev_trx_price = roundToMillionth(tickToPrice(data.tick, 2 , 6));
-    const trx_rev_price = Math.round(1/rev_trx_price);
+    const rev_trx_price = roundToMillionth(tickToPrice(data.tick, 2, 6));
+    const trx_rev_price = Math.round(1 / rev_trx_price);
 
     // console.log(roundToMillionth(price))
 
     console.log(rev_trx_price)
     console.log(trx_rev_price)
+    let msg = '*Current REV Price: * \n\n1 TRX = ' + trx_rev_price + ' REV';
+    bot.sendMessage(chatId, msg, opts);
 
 }
 

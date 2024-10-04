@@ -6,12 +6,13 @@ const token = '7553876036:AAG4rh8cmjYRIgg3LweIwJTFB5tuTjusAmI';
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, {polling: true});
 
+bot.sendMessage('@Bitcoin_Meter', 'Welcome to the bot!');
 
-bot.on('message', (msg) => {
-    const chatId = msg.chat.id;
-    const messageText = msg.text;
+// bot.on('message', (msg) => {
+//     const chatId = msg.chat.id;
+//     const messageText = msg.text;
   
-    if (messageText === '/start') {
-      bot.sendMessage(chatId, 'Welcome to the bot!');
-    }
-  });
+//     if (messageText === '/start') {
+//       bot.sendMessage(chatId, 'Welcome to the bot!');
+//     }
+//   });
