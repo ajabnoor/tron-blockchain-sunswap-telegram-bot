@@ -13,7 +13,7 @@ var tronWeb = new TronWeb({
 });
 
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000;
 
 // replace the value below with the Telegram token you receive from @BotFather
 const token = '7553876036:AAG4rh8cmjYRIgg3LweIwJTFB5tuTjusAmI';
