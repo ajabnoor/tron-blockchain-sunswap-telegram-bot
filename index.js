@@ -133,7 +133,7 @@ async function start() {
     \n================\n\n*Buy REV now from* [SunSwap](${sunswap_url})
     \n================\n\n*Check REV Chart in* [DexTools](${dextools_url})
     \n================\n\n*How TRX/REV pool works?* [Read Here](${pool_desc_url})
-    \n================\n\n*REV Smart Contract:*\n\nTKKkXMr7uuZ5kdajTcTqz9YNhAfNZnr7wm
+    \n================\n\n*REV Smart Contract:*\nTKKkXMr7uuZ5kdajTcTqz9YNhAfNZnr7wm
     \n================`;
 
 
