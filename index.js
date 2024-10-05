@@ -104,6 +104,13 @@ setInterval(function() {
 
 }, the_interval);
 
+//keep server running
+setInterval(function() {
+  
+    console.log('servie running');
+
+}, 30000);
+
 async function start() {
 
     tronWeb.setAddress('TEe5MgWnhEEEoMUrRBsAovSJnDK4QQivBe');
