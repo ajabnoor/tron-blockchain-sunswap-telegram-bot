@@ -26,7 +26,7 @@ const token = '7553876036:AAG4rh8cmjYRIgg3LweIwJTFB5tuTjusAmI';
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, { polling: false });
 const chatId = '@Bitcoin_Meter';
-const opts = {parse_mode: 'Markdown'};
+const opts = {parse_mode: 'Markdown', disable_web_page_preview: true};
 var minutes = 240;
 var the_interval = minutes * 60 * 1000;
 var sunswap_url = 'https://sun.io/?lang=en-US#/v3/swap';
@@ -98,8 +98,6 @@ app.get('/ping', (req, res) => {
 app.listen(port, () => {
     console.log(`App listening on port ${port}`)
 })
-
-
 
 //interval for pushing telegram messages
 setInterval(function() {
