@@ -2,6 +2,8 @@
 import express from 'express';
 import { TronWeb } from 'tronweb';
 import TelegramBot from 'node-telegram-bot-api';
+import axios from 'axios';
+
 
 //tronweb variables
 const privateKey = process.env.PRIVATE_KEY
@@ -88,28 +90,26 @@ const tickToPrice = (tick, tokenDecimals0, tokenDecimals1) => {
     return ratio * decimalShift;
 }
 
-app.get('/', (req, res) => {
+app.get('/ping', (req, res) => {
     res.send('sucess response')
+    console.log('keep it running')
 })
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`App listening on port ${port}`)
 })
 
 
 
+//interval for pushing telegram messages
 setInterval(function() {
-  
     start();
-
 }, the_interval);
 
 //keep server running
 setInterval(function() {
-  
-    console.log('servie running');
-
-}, 30000);
+axios.get(`http://localhost:${port}/ping`).catch((err) => console.log(err));
+}, 1000 * 60 * 5);
 
 async function start() {
 
