@@ -31,6 +31,7 @@ var minutes = 240;
 var the_interval = minutes * 60 * 1000;
 var sunswap_url = 'https://sun.io/?lang=en-US#/v3/swap';
 var dextools_url = 'https://www.dextools.io/app/en/tron/pair-explorer/TRzE68tbBoy2Ec5vLTLzQEPCUXktu4bB6D';
+var pool_desc_url = 'https://t.me/theRevolt_GoT/36453';
 
 let abi = [
     {
@@ -128,7 +129,12 @@ async function start() {
 
     console.log(rev_trx_price)
     console.log(trx_rev_price)
-    let msg = `*Current REV Price: * \n\n1 TRX = ${trx_rev_price} REV\n\n================\n\n*Trade REV in* [SunSwap](${sunswap_url})\n\n================\n\n*Check REV Chart in* [DexTools](${dextools_url})\n\n`;
+    let msg = `*Current REV Price: * \n\n1 TRX = ${trx_rev_price} REV
+    \n================\n\n*Buy REV now from* [SunSwap](${sunswap_url})
+    \n================\n\n*Check REV Chart in* [DexTools](${dextools_url})
+    \n================\n\n*How TRX/REV pool works?* [Read Here](${pool_desc_url})
+    \n================\n\n*REV Smart Contract:*\n\nTKKkXMr7uuZ5kdajTcTqz9YNhAfNZnr7wm
+    \n================`;
 
 
     bot.sendMessage(chatId, msg, opts);
