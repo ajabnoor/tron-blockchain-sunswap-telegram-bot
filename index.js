@@ -29,7 +29,7 @@ const bot = new TelegramBot(token, { polling: false });
 // const chatId = '@Bitcoin_Meter';
 const chatId = '@theRevolt_GoT';
 const opts = {parse_mode: 'Markdown', disable_web_page_preview: true};
-var minutes = 240;
+var minutes = 480;
 var the_interval = minutes * 60 * 1000;
 var sunswap_url = 'https://sun.io/?lang=en-US#/v3/swap';
 var dextools_url = 'https://www.dextools.io/app/en/tron/pair-explorer/TRzE68tbBoy2Ec5vLTLzQEPCUXktu4bB6D';
@@ -141,5 +141,3 @@ async function start() {
 
     bot.sendMessage(chatId, msg, opts);
 }
-
-start();
