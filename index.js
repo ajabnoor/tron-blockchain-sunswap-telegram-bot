@@ -26,12 +26,6 @@ const token = '7720868534:AAH0-HyKs8S0H1NknM-xNTdJn5nhtwRzu_s';
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, { polling: true });
 
-if(bot.isPolling()) {
-    await bot.stopPolling();
-    }
-    
-    await bot.startPolling();
-
 // const chatId = '@Bitcoin_Meter';
 const chatId = '@theRevolt_GoT';
 const opts = {parse_mode: 'Markdown', disable_web_page_preview: true};
