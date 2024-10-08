@@ -4,7 +4,6 @@ import { TronWeb } from 'tronweb';
 import TelegramBot from 'node-telegram-bot-api';
 import axios from 'axios';
 
-
 //tronweb variables
 const privateKey = process.env.PRIVATE_KEY
 const apiKey = '65a896e1-1da8-459b-80b0-cf0ac3a2e786'
@@ -25,7 +24,7 @@ const port = process.env.PORT || 3000;
 const token = '7720868534:AAH0-HyKs8S0H1NknM-xNTdJn5nhtwRzu_s';
 
 // Create a bot that uses 'polling' to fetch new updates
-const bot = new TelegramBot(token, { polling: false });
+const bot = new TelegramBot(token, { polling: true });
 // const chatId = '@Bitcoin_Meter';
 const chatId = '@theRevolt_GoT';
 const opts = {parse_mode: 'Markdown', disable_web_page_preview: true};
@@ -104,7 +103,7 @@ app.listen(port, () => {
 
 //interval for pushing telegram messages
 setInterval(function() {
-    start();
+    mainPost();
 }, the_interval);
 
 //keep server running
@@ -112,7 +111,7 @@ setInterval(function() {
 axios.get(`http://localhost:${port}/ping`).catch((err) => console.log(err));
 }, 1000 * 60 * 5);
 
-async function start() {
+async function mainPost() {
 
     tronWeb.setAddress('TEe5MgWnhEEEoMUrRBsAovSJnDK4QQivBe');
 
@@ -139,3 +138,24 @@ async function start() {
 
     bot.sendMessage(chatId, msg, opts);
 }
+
+async function miniPost() {
+    tronWeb.setAddress('TEe5MgWnhEEEoMUrRBsAovSJnDK4QQivBe');
+
+    let contract = await tronWeb.contract(abi, 'TRzE68tbBoy2Ec5vLTLzQEPCUXktu4bB6D');
+    let data = await contract.slot0().call();
+
+    const rev_trx_price = roundToMillionth(tickToPrice(data.tick, 2, 6));
+    const trx_rev_price = Math.round(1 / rev_trx_price);
+
+    console.log('user hit price')
+
+    let msg = `*Current REV Price: * \n\n1 TRX = ${trx_rev_price} REV`;
+    bot.sendMessage(chatId, msg, opts);
+}
+
+bot.onText(/\/price/, () => {
+
+    miniPost();
+    
+    });
