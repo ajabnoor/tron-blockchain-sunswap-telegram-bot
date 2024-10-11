@@ -31,7 +31,7 @@ const chatId = '@theRevolt_GoT';
 const opts = {parse_mode: 'Markdown', disable_web_page_preview: true};
 var minutes = 1440;
 var the_interval = minutes * 60 * 1000;
-var sunswap_url = 'https://sun.io/?lang=en-US#/v3/swap';
+var sunswap_url = 'https://sun.io/?lang=en-US#/v3/swap?t1=T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb&t0=TKKkXMr7uuZ5kdajTcTqz9YNhAfNZnr7wm&type=swap';
 var dextools_url = 'https://www.dextools.io/app/en/tron/pair-explorer/TRzE68tbBoy2Ec5vLTLzQEPCUXktu4bB6D';
 var pool_desc_url = 'https://t.me/theRevolt_GoT/36453';
 
@@ -135,7 +135,7 @@ async function mainPost() {
     \n================\n\n*Buy REV now from* [SunSwap](${sunswap_url})
     \n================\n\n*Check REV Chart in* [DexTools](${dextools_url})
     \n================\n\n*How TRX/REV pool works?* [Read Here](${pool_desc_url})
-    \n================\n\n*REV Smart Contract:*\nTKKkXMr7uuZ5kdajTcTqz9YNhAfNZnr7wm`;
+    \n================\n\n*The Revolt Website:* therevolt.io`;
 
     bot.sendMessage(chatId, msg, opts);
 }
